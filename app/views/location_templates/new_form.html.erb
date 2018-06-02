@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @location.present? %>
+  <% if @location.errors.any? %>
+    <% @location.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new location
+</h1>
+
+<hr>
+
+<form action="/create_location" method="post">
+  <!-- Label and input for location_name -->
+  <div class="form-group">
+    <label for="location_name">
+      Location name
+    </label>
+
+    <input type="text" id="location_name" name="location_name" class="form-control" value="<%= @location.try(:location_name) %>">
+  </div>
+
+  <!-- Label and input for location_address -->
+  <div class="form-group">
+    <label for="location_address">
+      Location address
+    </label>
+
+    <input type="text" id="location_address" name="location_address" class="form-control" value="<%= @location.try(:location_address) %>">
+  </div>
+
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @location.try(:user_id) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create location
+  </button>
+</form>
+
+<hr>
+
+<a href="/locations">
+  Go back
+</a>
