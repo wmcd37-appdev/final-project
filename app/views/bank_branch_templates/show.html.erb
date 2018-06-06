@@ -1,0 +1,56 @@
+<h1>
+  Bank branch #<%= @bank_branch.id %> details
+</h1>
+
+<a href="/bank_branches/<%= @bank_branch.id %>/edit">
+  Edit bank branch
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Bank branch name
+  </dt>
+  <dd>
+    <%= @bank_branch.bank_branch_name %>
+  </dd>
+
+  <dt>
+    Bank branch address
+  </dt>
+  <dd>
+    <%= @bank_branch.bank_branch_address %>
+  </dd>
+
+  <dt>
+    Bank
+  </dt>
+  <dd>
+    <%= @bank_branch.bank_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@bank_branch.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@bank_branch.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_bank_branch/<%= @bank_branch.id %>">
+  Delete bank branch
+</a>
+
+<hr>
+
+<a href="/bank_branches">
+  Go back
+</a>

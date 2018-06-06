@@ -1,0 +1,66 @@
+<h1>
+  All zip codes
+</h1>
+
+<a href="/zip_codes/new">
+  Add a new zip code
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Zip number
+    </th>
+
+    <th>
+      Location
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @zip_codes.each do |zip_code| %>
+  <tr>
+    <td>
+      <%= zip_code.id %>
+    </td>
+
+    <td>
+      <%= zip_code.zip_number %>
+    </td>
+
+    <td>
+      <%= zip_code.location_id %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(zip_code.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(zip_code.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/zip_codes/<%= zip_code.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

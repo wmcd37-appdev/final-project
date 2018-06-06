@@ -1,0 +1,74 @@
+<!-- Validation failure messages -->
+<% if @bank.present? %>
+  <% if @bank.errors.any? %>
+    <% @bank.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new bank
+</h1>
+
+<hr>
+
+<form action="/create_bank" method="post">
+  <!-- Label and input for bank_name -->
+  <div class="form-group">
+    <label for="bank_name">
+      Bank name
+    </label>
+
+    <input type="text" id="bank_name" name="bank_name" class="form-control" value="<%= @bank.try(:bank_name) %>">
+  </div>
+
+  <!-- Label and input for website_address -->
+  <div class="form-group">
+    <label for="website_address">
+      Website address
+    </label>
+
+    <input type="text" id="website_address" name="website_address" class="form-control" value="<%= @bank.try(:website_address) %>">
+  </div>
+
+  <!-- Label and input for total_deposits -->
+  <div class="form-group">
+    <label for="total_deposits">
+      Total deposits
+    </label>
+
+    <input type="text" id="total_deposits" name="total_deposits" class="form-control" value="<%= @bank.try(:total_deposits) %>">
+  </div>
+
+  <!-- Label and input for fdic_number -->
+  <div class="form-group">
+    <label for="fdic_number">
+      Fdic number
+    </label>
+
+    <input type="text" id="fdic_number" name="fdic_number" class="form-control" value="<%= @bank.try(:fdic_number) %>">
+  </div>
+
+  <!-- Label and input for fdic_active -->
+  <div class="form-check">
+    <input type="hidden" value="0" name="fdic_active">
+    <input id="fdic_active" class="form-check-input" name="fdic_active" type="checkbox" <%= "checked" if @bank.try(:fdic_active) %>>
+
+    <label for="fdic_active" class="form-check-label">
+      Fdic active
+    </label>
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create bank
+  </button>
+</form>
+
+<hr>
+
+<a href="/banks">
+  Go back
+</a>

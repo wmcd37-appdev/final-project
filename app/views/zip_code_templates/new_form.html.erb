@@ -1,0 +1,46 @@
+<!-- Validation failure messages -->
+<% if @zip_code.present? %>
+  <% if @zip_code.errors.any? %>
+    <% @zip_code.errors.full_messages.each do |message| %>
+      <div class="alert alert-danger">
+        <%= message %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new zip code
+</h1>
+
+<hr>
+
+<form action="/create_zip_code" method="post">
+  <!-- Label and input for zip_number -->
+  <div class="form-group">
+    <label for="zip_number">
+      Zip number
+    </label>
+
+    <input type="text" id="zip_number" name="zip_number" class="form-control" value="<%= @zip_code.try(:zip_number) %>">
+  </div>
+
+  <!-- Label and input for location_id -->
+  <div class="form-group">
+    <label for="location_id">
+      Location
+    </label>
+
+    <input type="text" id="location_id" name="location_id" class="form-control" value="<%= @zip_code.try(:location_id) %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Create zip code
+  </button>
+</form>
+
+<hr>
+
+<a href="/zip_codes">
+  Go back
+</a>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180602212052) do
+ActiveRecord::Schema.define(version: 20180603021352) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -43,12 +43,34 @@ ActiveRecord::Schema.define(version: 20180602212052) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "bank_branches", force: :cascade do |t|
+    t.string "bank_branch_name"
+    t.string "bank_branch_address"
+    t.integer "bank_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "location_id"
+  end
+
+  create_table "banks", force: :cascade do |t|
+    t.string "bank_name"
+    t.string "website_address"
+    t.integer "total_deposits"
+    t.integer "fdic_number"
+    t.boolean "fdic_active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "location_name"
     t.string "location_address"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "latitude"
+    t.float "longitude"
+    t.integer "ziplocation"
   end
 
   create_table "users", force: :cascade do |t|
@@ -67,6 +89,13 @@ ActiveRecord::Schema.define(version: 20180602212052) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "zip_codes", force: :cascade do |t|
+    t.integer "zip_number"
+    t.integer "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
