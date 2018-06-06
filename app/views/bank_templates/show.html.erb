@@ -1,0 +1,70 @@
+<h1>
+  Bank #<%= @bank.id %> details
+</h1>
+
+<a href="/banks/<%= @bank.id %>/edit">
+  Edit bank
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Bank name
+  </dt>
+  <dd>
+    <%= @bank.bank_name %>
+  </dd>
+
+  <dt>
+    Website address
+  </dt>
+  <dd>
+    <%= @bank.website_address %>
+  </dd>
+
+  <dt>
+    Total deposits
+  </dt>
+  <dd>
+    <%= @bank.total_deposits %>
+  </dd>
+
+  <dt>
+    Fdic number
+  </dt>
+  <dd>
+    <%= @bank.fdic_number %>
+  </dd>
+
+  <dt>
+    Fdic active
+  </dt>
+  <dd>
+    <%= @bank.fdic_active %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@bank.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@bank.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_bank/<%= @bank.id %>">
+  Delete bank
+</a>
+
+<hr>
+
+<a href="/banks">
+  Go back
+</a>

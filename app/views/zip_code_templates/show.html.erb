@@ -1,0 +1,49 @@
+<h1>
+  Zip code #<%= @zip_code.id %> details
+</h1>
+
+<a href="/zip_codes/<%= @zip_code.id %>/edit">
+  Edit zip code
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Zip number
+  </dt>
+  <dd>
+    <%= @zip_code.zip_number %>
+  </dd>
+
+  <dt>
+    Location
+  </dt>
+  <dd>
+    <%= @zip_code.location_id %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@zip_code.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@zip_code.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_zip_code/<%= @zip_code.id %>">
+  Delete zip code
+</a>
+
+<hr>
+
+<a href="/zip_codes">
+  Go back
+</a>

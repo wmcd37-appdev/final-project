@@ -1,0 +1,44 @@
+<!-- Validation failure messages -->
+<% if @zip_code.errors.any? %>
+  <% @zip_code.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit zip code #<%= @zip_code.id %>
+</h1>
+
+<hr>
+
+<form action="/update_zip_code/<%= @zip_code.id %>" method="post">
+  <!-- Label and input for zip_number -->
+  <div class="form-group">
+    <label for="zip_number">
+      Zip number
+    </label>
+
+    <input type="text" id="zip_number" name="zip_number" class="form-control" value="<%= @zip_code.zip_number %>">
+  </div>
+
+  <!-- Label and input for location_id -->
+  <div class="form-group">
+    <label for="location_id">
+      Location
+    </label>
+
+    <input type="text" id="location_id" name="location_id" class="form-control" value="<%= @zip_code.location_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update zip code
+  </button>
+</form>
+
+<hr>
+
+<a href="/zip_codes">
+  Go back
+</a>

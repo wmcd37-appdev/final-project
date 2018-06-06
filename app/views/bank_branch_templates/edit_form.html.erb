@@ -1,0 +1,53 @@
+<!-- Validation failure messages -->
+<% if @bank_branch.errors.any? %>
+  <% @bank_branch.errors.full_messages.each do |message| %>
+    <div class="alert">
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Edit bank branch #<%= @bank_branch.id %>
+</h1>
+
+<hr>
+
+<form action="/update_bank_branch/<%= @bank_branch.id %>" method="post">
+  <!-- Label and input for bank_branch_name -->
+  <div class="form-group">
+    <label for="bank_branch_name">
+      Bank branch name
+    </label>
+
+    <input type="text" id="bank_branch_name" name="bank_branch_name" class="form-control" value="<%= @bank_branch.bank_branch_name %>">
+  </div>
+
+  <!-- Label and input for bank_branch_address -->
+  <div class="form-group">
+    <label for="bank_branch_address">
+      Bank branch address
+    </label>
+
+    <input type="text" id="bank_branch_address" name="bank_branch_address" class="form-control" value="<%= @bank_branch.bank_branch_address %>">
+  </div>
+
+  <!-- Label and input for bank_id -->
+  <div class="form-group">
+    <label for="bank_id">
+      Bank
+    </label>
+
+    <input type="text" id="bank_id" name="bank_id" class="form-control" value="<%= @bank_branch.bank_id %>">
+  </div>
+
+  <button class="btn btn-block btn-outline-secondary">
+    Update bank branch
+  </button>
+</form>
+
+<hr>
+
+<a href="/bank_branches">
+  Go back
+</a>

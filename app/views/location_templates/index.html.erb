@@ -1,0 +1,74 @@
+<h1>
+  All locations
+</h1>
+
+<a href="/locations/new">
+  Add a new location
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Location name
+    </th>
+
+    <th>
+      Location address
+    </th>
+
+    <th>
+      User
+    </th>
+
+    <th>
+      Latitude
+    </th>
+
+    <th>
+      Longitude
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @locations.each do |location| %>
+  <tr>
+    <td>
+      <%= location.id %>
+    </td>
+
+    <td>
+      <%= location.location_name %>
+    </td>
+
+    <td>
+      <%= location.location_address %>
+    </td>
+
+    <td>
+      <%= location.user_id %>
+    </td>
+
+    <td>
+      <%= location.latitude %>
+    </td>
+
+    <td>
+      <%= location.longitude %>
+    </td>
+
+    <td>
+      <a href="/locations/<%= location.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

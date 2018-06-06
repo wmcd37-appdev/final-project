@@ -1,0 +1,79 @@
+<h1>
+  All bank branches
+</h1>
+
+<a href="/bank_branches/new">
+  Add a new bank branch
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Bank branch name
+    </th>
+
+    <th>
+      Bank branch address
+    </th>
+
+    <th>
+      Bank
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+    
+    <th>
+      Location ID
+    </th>
+    <th>
+    </th>
+  </tr>
+
+  <% @bank_branches.each do |bank_branch| %>
+  <tr>
+    <td>
+      <%= bank_branch.id %>
+    </td>
+
+    <td>
+      <%= bank_branch.bank_branch_name %>
+    </td>
+
+    <td>
+      <%= bank_branch.bank_branch_address %>
+    </td>
+
+    <td>
+      <%= bank_branch.bank_id %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(bank_branch.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(bank_branch.updated_at) %> ago
+    </td>
+    <td>
+      <%= bank_branch.location_id %>
+    </td>
+    <td>
+      <a href="/bank_branches/<%= bank_branch.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>

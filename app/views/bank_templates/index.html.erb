@@ -1,0 +1,96 @@
+<h1>
+  All banks
+</h1>
+
+<a href="/banks/new">
+  Add a new bank
+</a>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <th>
+      ID
+    </th>
+
+    <th>
+      Bank name
+    </th>
+
+    <th>
+      Website address
+    </th>
+
+    <th>
+      Total deposits
+    </th>
+
+    <th>
+      Fdic number
+    </th>
+
+    <th>
+      Fdic active
+    </th>
+
+    <th>
+      Created at
+    </th>
+
+    <th>
+      Updated at
+    </th>
+
+    <th>
+    </th>
+  </tr>
+
+  <% @banks.each do |bank| %>
+  <tr>
+    <td>
+      <%= bank.id %>
+    </td>
+
+    <td>
+      <%= bank.bank_name %>
+    </td>
+
+    <td>
+      <%= bank.website_address %>
+    </td>
+
+    <td>
+      <%= bank.total_deposits %>
+    </td>
+
+    <td>
+      <%= bank.fdic_number %>
+    </td>
+
+    <td>
+      <%= bank.fdic_active %>
+    </td>
+
+    <td>
+      <%= time_ago_in_words(bank.created_at) %> ago
+    </td>
+
+    <td>
+      <%= time_ago_in_words(bank.updated_at) %> ago
+    </td>
+
+    <td>
+      <a href="/banks/<%= bank.id %>">
+        Show details
+      </a>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<%= @locationarray %>
+<%= @finalbrancharray %>
+
+
+
