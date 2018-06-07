@@ -1,3 +1,18 @@
+
+<h1>
+  Welcome to the Bank Locator!
+</h1 >
+
+
+
+ <h4>Find banks with branches near all of the locations that are important to you!</h4>
+ 
+ <hr>
+ 
+
+
+
+
 <!-- Validation failure messages -->
 <% if @location.present? %>
   <% if @location.errors.any? %>
@@ -10,14 +25,19 @@
 <% end %>
 
 <div class="mb-3">
-<h1>
-  Add a new location
-</h1>
+
 </div>
+<div class="alert alert-dismissible alert-success">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                 First you will need to choose all of the locations to include in your search below
+              </div>
+
+<div class="card  bg-secondary text-dark font-weight-bold mb-3" >
 
 
-<div class="card  bg-secondary text-dark font-weight-bold border-dark mb-3" >
+  
   <div class="card-body">
+      
 <form action="/create_location" method="post">
   <!-- Label and input for location_name -->
   <div class="form-group">
@@ -25,7 +45,7 @@
       Location name
     </label>
 
-    <input type="text" id="location_name" name="location_name" class="form-control" value="<%= @location.try(:location_name) %>">
+    <input type="text" id="location_name" name="location_name" class="form-control" placeholder="Choose a name for your first location (ex: &quot;My House&quot)">
   </div>
 
   <!-- Label and input for location_address -->
@@ -34,7 +54,7 @@
       Location address
     </label>
 
-    <input type="text" id="location_address" name="location_address" class="form-control" value="<%= @location.try(:location_address) %>">
+    <input type="text" id="location_address" name="location_address" class="form-control" placeholder="Input the mailing location for your location">
   </div>
 
   <!-- Label and input for user_id -->
@@ -61,5 +81,5 @@
 
 
 <a href="/locations">
-  Go back
+  Go directly to location list
 </a>

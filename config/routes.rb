@@ -73,6 +73,8 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_location/:id_to_remove", { :controller => "locations", :action => "destroy_row" })
 
+
+  get("/welcome", { :controller => "locations", :action => "welcome" })
   #------------------------------
 
   devise_for :users
@@ -81,5 +83,6 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
   
-
+  
+root "locations#welcome"
 end

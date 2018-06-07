@@ -10,4 +10,5 @@
 #
 
 class ZipCode < ApplicationRecord
+    belongs_to :location
 end

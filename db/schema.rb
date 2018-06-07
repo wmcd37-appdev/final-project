@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603021352) do
+ActiveRecord::Schema.define(version: 20180606234800) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -55,11 +55,13 @@ ActiveRecord::Schema.define(version: 20180603021352) do
   create_table "banks", force: :cascade do |t|
     t.string "bank_name"
     t.string "website_address"
-    t.integer "total_deposits"
+    t.float "total_deposits"
     t.integer "fdic_number"
     t.boolean "fdic_active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "date_established"
+    t.float "total_assets"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -71,6 +73,8 @@ ActiveRecord::Schema.define(version: 20180603021352) do
     t.float "latitude"
     t.float "longitude"
     t.integer "ziplocation"
+    t.string "display_address"
+    t.integer "searchradius"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,5 +1,5 @@
 <h1>
-  All locations
+  All of my chosen locations
 </h1>
 
 <a href="/locations/new">
@@ -8,11 +8,12 @@
 
 <hr>
 
+
+<div class="card    border-dark mb-3" >
+  <div class="card-body">
 <table class="table">
   <tr>
-    <th>
-      ID
-    </th>
+
 
     <th>
       Location name
@@ -23,16 +24,10 @@
     </th>
 
     <th>
-      User
+      Search Radius (km)
     </th>
 
-    <th>
-      Latitude
-    </th>
 
-    <th>
-      Longitude
-    </th>
 
     <th>
     </th>
@@ -40,35 +35,36 @@
 
   <% @locations.each do |location| %>
   <tr>
-    <td>
-      <%= location.id %>
-    </td>
+
 
     <td>
       <%= location.location_name %>
     </td>
 
     <td>
-      <%= location.location_address %>
+      <%= location.display_address %>
     </td>
 
     <td>
-      <%= location.user_id %>
+      <%= location.searchradius %>
     </td>
 
-    <td>
-      <%= location.latitude %>
-    </td>
+    
 
     <td>
-      <%= location.longitude %>
-    </td>
-
-    <td>
-      <a href="/locations/<%= location.id %>">
+      <a href="/locations/<%= location.id  %>" ><button class = "btn btn-sm btn-dark">
         Show details
-      </a>
+      </button></a>
     </td>
   </tr>
   <% end %>
 </table>
+</div>
+</div>
+
+<hr>
+
+
+<a href="/banks" >
+  <button class="btn btn-block btn-dark">Find banks with branches near all chosen locations</button>
+</a>

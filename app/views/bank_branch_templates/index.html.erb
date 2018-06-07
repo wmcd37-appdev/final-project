@@ -1,10 +1,7 @@
 <h1>
-  All bank branches
+  <%= Bank.find_by(fdic_number: params.fetch("thebankid")).bank_name %>
 </h1>
 
-<a href="/bank_branches/new">
-  Add a new bank branch
-</a>
 
 <hr>
 

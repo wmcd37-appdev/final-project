@@ -1,5 +1,5 @@
 <h1>
-  Location #<%= @location.id %> details
+   Details for <%= @location.location_name %>
 </h1>
 
 <a href="/locations/<%= @location.id %>/edit">
@@ -20,29 +20,17 @@
     Location address
   </dt>
   <dd>
-    <%= @location.location_address %>
+    <%= @location.display_address %>
   </dd>
 
   <dt>
-    User
+    Search Radius (km)
   </dt>
   <dd>
-    <%= @location.user_id %>
+    <%= @location.searchradius %>
   </dd>
 
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@location.created_at) %> ago
-  </dd>
-
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= time_ago_in_words(@location.updated_at) %> ago
-  </dd>
+  
 </dl>
 
 <a href="/delete_location/<%= @location.id %>">

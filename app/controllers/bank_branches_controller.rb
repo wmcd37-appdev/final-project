@@ -1,6 +1,6 @@
 class BankBranchesController < ApplicationController
   def index
-    @bank_branches = BankBranch.all
+    @bank_branches = BankBranch.where(bank_id: params.fetch("thebankid"))
 
     render("bank_branch_templates/index.html.erb")
   end

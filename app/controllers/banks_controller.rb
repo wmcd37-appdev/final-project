@@ -1,42 +1,37 @@
 class BanksController < ApplicationController
   def index
-    @userlocations = Location.where(user_id: current_user.id)
-    @locationarray = Array.new
-    @userlocations.each do |userlocation|
+    Bank.delete_all
+      @userlocations = Location.where(user_id: current_user.id)
+      @locationarray = Array.new
+      @userlocations.each do |userlocation|
+        @locationarray.push(userlocation.id)
+      end
+    @finalbrancharray = Array.new  
+    @locationarray.each do |location|
+      @anumber = BankBranch.where(location_id: location)
+      @brancharray = Array.new
+      @anumber.each do |branch|
+        @brancharray.push(branch.bank_id)
+        @brancharray = @brancharray.uniq
+      end
      
-      @locationarray.push(userlocation.id)
-           
+      @finalbrancharray.push(@brancharray)
+       
     end
-    
-    @anumber = BankBranch.where(location_id: @locationarray.at(0))
-    @brancharray1 = Array.new
-    @anumber.each do |branch|
-      @brancharray1.push(branch.bank_id)
-      @brancharray1 = @brancharray1.uniq
-    end
-    
-    @anumber = BankBranch.where(location_id: @locationarray.at(1))
-    @brancharray2 = Array.new
-    @anumber.each do |branch|
-      @brancharray2.push(branch.bank_id)
-      @brancharray2 = @brancharray2.uniq
-    end    
+      @finalbrancharray = @finalbrancharray.inject(&:&)
+                
 
-    @anumber = BankBranch.where(location_id: @locationarray.at(2))
-    @brancharray3 = Array.new
-    @anumber.each do |branch|
-      @brancharray3.push(branch.bank_id)
-      @brancharray3 = @brancharray3.uniq
-    end 
-    
-    @finalbrancharray = Array.new
-    @finalbrancharray = @brancharray1 & @brancharray2 & @brancharray3
-    
     @finalbrancharray.each do |bank|
       @insturl = "https://odata.fdic.gov/v1/financial-institution/Institution?$format=json&$top=1000&$filter=certNumber%20eq%20%27" + bank.to_s + "%27"
       @parsedinst =JSON.parse(open(@insturl).read)
       @instresults = @parsedinst.fetch("d").fetch("results").at(0).fetch("instFinLegalName")
+
       @bank = Bank.new
+     @bank.total_deposits = @parsedinst.fetch("d").fetch("results").at(0).fetch("totalDeposits")
+     @bank.website_address = @parsedinst.fetch("d").fetch("results").at(0).fetch("webSite")
+     @bank.total_assets = @parsedinst.fetch("d").fetch("results").at(0).fetch("totalAssets")
+     @bank.date_established = @parsedinst.fetch("d").fetch("results").at(0).fetch("establishedDate")
+     @bank.fdic_active = @parsedinst.fetch("d").fetch("results").at(0).fetch("active")
       @bank.bank_name = @instresults
       @bank.fdic_number = bank
       @bank.save

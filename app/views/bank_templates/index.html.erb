@@ -1,96 +1,82 @@
-<h1>
-  All banks
-</h1>
 
-<a href="/banks/new">
-  Add a new bank
+<h1>
+  Banks with presence in all chosen locations
+</h1 >
+
+
+
+<a href="/locations">
+  Back to list of locations
 </a>
 
 <hr>
 
-<table class="table">
-  <tr>
-    <th>
-      ID
-    </th>
 
-    <th>
-      Bank name
-    </th>
 
-    <th>
-      Website address
-    </th>
-
-    <th>
-      Total deposits
-    </th>
-
-    <th>
-      Fdic number
-    </th>
-
-    <th>
-      Fdic active
-    </th>
-
-    <th>
-      Created at
-    </th>
-
-    <th>
-      Updated at
-    </th>
-
-    <th>
-    </th>
-  </tr>
 
   <% @banks.each do |bank| %>
-  <tr>
-    <td>
-      <%= bank.id %>
-    </td>
+<div class="card border-dark mb-3" >
+  <div class="card-header"><h3><%= bank.bank_name %></h3></div>
+  <div class="card-body">
+    <p class="card-text">Total Deposits: <%= number_to_currency(bank.total_deposits / 1000000, precision: 0) %> billion</p>  
+    <p class="card-text">Total Assets: <%= number_to_currency(bank.total_assets / 1000000, precision: 0) %> billion</p>  
+    <p class="card-text">Date Established: <%= Date.strptime(bank.date_established).year %></p>
+    <% if bank.fdic_active == true    %>
+    <p class="card-text">FDIC Status: Active  </p>  
+    <% else %>
+    <p class="card-text">FDIC Status: Inactive  </p> 
+    <% end %>
+    <p class="card-text">FDIC Certification Number: <%= bank.fdic_number %></p>
+    
+    
+    
+    
+    
+    <p class="card-text">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<form action="/bank_branches" method="get">
+  <!-- Label and input for bank_name -->
+  
+  
+    <input type="hidden" value="<%= bank.fdic_number %>" name="thebankid">
+    
 
-    <td>
-      <%= bank.bank_name %>
-    </td>
+  <button class="btn btn-link ml-0 pl-0 pt-0 mb-0 pb-0">
+    View Nearby Branches
+  </button>
+</form>
+    
+    
+    
+    
+    
+    
+    </p>
+    
+    
+    
+    
+    
+    
+    
+  
+    <p class="card-text pt-0 mt-0">
 
-    <td>
-      <%= bank.website_address %>
-    </td>
-
-    <td>
-      <%= bank.total_deposits %>
-    </td>
-
-    <td>
-      <%= bank.fdic_number %>
-    </td>
-
-    <td>
-      <%= bank.fdic_active %>
-    </td>
-
-    <td>
-      <%= time_ago_in_words(bank.created_at) %> ago
-    </td>
-
-    <td>
-      <%= time_ago_in_words(bank.updated_at) %> ago
-    </td>
-
-    <td>
-      <a href="/banks/<%= bank.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
-
-<%= @locationarray %>
-<%= @finalbrancharray %>
-
-
+      <% if bank.website_address.include? "http" %>
+      <a href=<%= bank.website_address %>>Website</a> </p>
+      
+      <% else %>
+      <a href=https://<%= bank.website_address %>>Website</a> </p>
+      <% end %>
+  </div>
+</div>
+<% end %>
 
