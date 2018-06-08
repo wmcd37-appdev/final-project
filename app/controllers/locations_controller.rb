@@ -49,19 +49,21 @@ class LocationsController < ApplicationController
     @zip_array = @parsed_data2.fetch("zip_codes")
 
 
-    if @zip_array.length == 0
-      @zip_array.push(@location.ziplocation)
-    end
+
  
     if @location.valid?
     
      @location.save
      
-     
+        if @zip_array.length == 0
+      @zip_array.push(@location.ziplocation)
+    end
+    
       @zip_array.each do |zip|
      
         @zip = ZipCode.new
         @zip.zip_number = zip
+        
         @location.id = Location.find_by(location_name: @location.location_name).id
         @zip.location_id = @location.id
        if @zip.valid?
@@ -79,6 +81,7 @@ class LocationsController < ApplicationController
           @bank_branch = BankBranch.new
           @bank_branch.bank_id = branch.fetch("certNumber")
           @bank_branch.location_id = @location.id
+          @bank_branch.bank_branch_address = branch.fetch("address")
          
           if @bank_branch.valid?
           @bank_branch.save
