@@ -12,4 +12,6 @@
 #
 
 class BankBranch < ApplicationRecord
+    validates :bank_id, numericality: { only_integer: true }
+    validates :location_id, numericality: { only_integer: true }
 end

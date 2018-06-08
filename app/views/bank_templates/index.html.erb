@@ -69,12 +69,13 @@
     
   
     <p class="card-text pt-0 mt-0">
-
+      <% if bank.website_address != nil %>
       <% if bank.website_address.include? "http" %>
       <a href=<%= bank.website_address %>>Website</a> </p>
       
       <% else %>
       <a href=https://<%= bank.website_address %>>Website</a> </p>
+      <% end %>
       <% end %>
   </div>
 </div>

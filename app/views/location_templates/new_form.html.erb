@@ -34,7 +34,7 @@
       Location address
     </label>
 
-    <input type="text" id="location_address" name="location_address" class="form-control" value="<%= @location.try(:location_address) %>">
+    <input type="text" id="location_address" name="location_address" class="form-control" value="<%= @location.try(:display_address) %>">
   </div>
 
   <!-- Label and input for user_id -->

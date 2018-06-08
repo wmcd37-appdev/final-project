@@ -2,6 +2,9 @@ class BanksController < ApplicationController
   def index
     Bank.delete_all
       @userlocations = Location.where(user_id: current_user.id)
+      if @userlocations.length == 0
+        redirect_to("/locations/", :notice => "You have not selected any locations. Please add locations before continuing to the banks page.")
+      else
       @locationarray = Array.new
       @userlocations.each do |userlocation|
         @locationarray.push(userlocation.id)
@@ -34,7 +37,12 @@ class BanksController < ApplicationController
      @bank.fdic_active = @parsedinst.fetch("d").fetch("results").at(0).fetch("active")
       @bank.bank_name = @instresults
       @bank.fdic_number = bank
+      
+      if @bank.valid?
       @bank.save
+    else
+      redirect_to("/locations/", :notice => "Bank determination failed. Please try again or contact the administrator.")
+    end
     end
     
     
@@ -42,6 +50,7 @@ class BanksController < ApplicationController
     @banks = Bank.all
 
     render("bank_templates/index.html.erb")
+  end
   end
 
   def show

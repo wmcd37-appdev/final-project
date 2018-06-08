@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   def index
-    @locations = Location.all
+    @locations = Location.where(user_id: current_user)
 
     render("location_templates/index.html.erb")
   end
@@ -33,7 +33,7 @@ class LocationsController < ApplicationController
       @location.searchradius = 2
     end
     require "open-uri"
-    completeurl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + url_safe_street_address + "&key=AIzaSyAqRRVQNLRaJgtIxoOope775l6KRAhmQec"
+    completeurl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + url_safe_street_address + "&key=" + ENV["GOOGLE_KEY"]
     parsed_data = JSON.parse(open(completeurl).read)
 
     # if parsed_data.dig("results") == []
@@ -54,14 +54,23 @@ class LocationsController < ApplicationController
     end
  
     if @location.valid?
-     redirect_to("/locations", :notice => "Location created successfully. YES")
+    
      @location.save
+     
+     
       @zip_array.each do |zip|
+     
         @zip = ZipCode.new
         @zip.zip_number = zip
+        @location.id = Location.find_by(location_name: @location.location_name).id
         @zip.location_id = @location.id
-        @zip.save
-    
+       if @zip.valid?
+                 @zip.save
+               else
+                  redirect_to("/locations/", :notice => "Zip finder failed. Please contact the administrator.")
+               end
+               
+
         @fdicurl = "https://odata.fdic.gov/v1/financial-institution/Branch?$format=json&$top=100&$filter=zip%20eq%20%27" + @zip.zip_number.to_s + "%27"
         @parsed_data3 =JSON.parse(open(@fdicurl).read)
         @fdicresults = @parsed_data3.fetch("d").fetch("results")
@@ -70,16 +79,21 @@ class LocationsController < ApplicationController
           @bank_branch = BankBranch.new
           @bank_branch.bank_id = branch.fetch("certNumber")
           @bank_branch.location_id = @location.id
+         
+          if @bank_branch.valid?
           @bank_branch.save
+        else
+          redirect_to("/locations/", :notice => "Bank Branch finder failed. Please contact the administrator.")
+        end
         end
       end
-
-    else
-     render("/location_templates/new_form")
-    end
+     
+     redirect_to("/locations/", :notice => "Location added successfully")
+else
+ render("location_templates/new_form.html.erb")
     
   end
-
+end
 
   def edit_form
     @location = Location.find(params.fetch("prefill_with_id"))

@@ -11,4 +11,9 @@
 
 class ZipCode < ApplicationRecord
     belongs_to :location
+    
+    validates :zip_number, presence: true
+    validates :location_id, presence: true
+    
+    
 end
